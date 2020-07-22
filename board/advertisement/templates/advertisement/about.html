@@ -5,14 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>О компании</title>
+    <title>{{ title }}</title>
 </head>
 <body>
-    <h3>О компании</h3>
-    <ul>
-        {% for item in about %}
-            <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
+    <h3>{{ name }}</h3>
+    <p>{{ description }}</p>
 </body>
 </html>

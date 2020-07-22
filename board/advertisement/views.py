@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
+from django.views.generic import TemplateView
 
 
 def advertisement_list(request):
@@ -22,9 +23,21 @@ def contacts(request):
     return render(request, 'advertisement/contacts.html', {'contacts': contacts})
 
 
-def about(request):
-    about = ['Бесплатные объявления', 'Бесплатные объявления в вашем городе']
-    return render(request, 'advertisement/about.html', {'about': about})
+class About(TemplateView):
+    template_name = 'advertisement/about.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['name'] = 'Бесплатные объявления в вашем городе'
+        context['title'] = 'Бесплатные объявления'
+        context['description'] = """
+        С вопросом – «Куда подать объявление? – в Москве сталкивается практически каждый.
+        Это не большая проблема, если речь идет, например, об одном объявлении.
+        Другое дело, когда размещать их приходится регулярно и в большом количестве.
+        Автоматизировать и упростить подачу объявлений поможет профессиональный сервис
+        бесплатных объявлений, через который можно отправить информацию на все сайты одновременно.
+        """
+        return context
 
 
 def categories(request):
