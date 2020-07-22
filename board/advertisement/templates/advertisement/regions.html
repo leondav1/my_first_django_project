@@ -5,15 +5,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Объявления</title>
+    <title>Регионы</title>
 </head>
 <body>
-    <h3>Объявления</h3>
+    <h3>Регионы</h3>
     <ul>
-        {% for advertisement in advertisements %}
-            {% for item in advertisement %}
-                <li>{{ item }}</li>
-            {% endfor %}
+        {% for region in regions %}
+            <li>{{ region }}</li>
         {% endfor %}
     </ul>
 </body>
