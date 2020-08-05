@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from django.core.exceptions import PermissionDenied
 
 
@@ -8,7 +10,9 @@ class FilterIPMiddleware:
     def __call__(self, request):
         allowed_ips = ['127.0.0.1']
         ip = request.META.get('REMOTE_ADDR')
-        if ip not in allowed_ips:
+        # pprint(dir(request))
+        # pprint(request.upload_handlers)
+        if not ip in allowed_ips:
             raise PermissionDenied
 
         response = self.get_response(request)

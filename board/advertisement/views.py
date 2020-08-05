@@ -1,7 +1,11 @@
+import random
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic import TemplateView
+
+from .models import Advertisement, AdvertisementStatus, AdvertisementType
 
 
 def advertisement_list(request):
@@ -15,7 +19,9 @@ def advertisement_list(request):
 
 
 def advertisement_details(request):
-    return render(request, 'advertisement/advertisement_details.html', {})
+    advertisements = Advertisement.objects.all()
+    advertisement = random.choice(advertisements)
+    return render(request, 'advertisement/advertisement_details.html', {'advertisement': advertisement})
 
 
 def contacts(request):
@@ -51,4 +57,21 @@ class RegionsView(View):
         return render(request, 'advertisement/regions.html', {'regions': regions})
 
     def post(self, request):
-        return render(request, 'advertisement/regions.html', {'regions': ['Регион успешно создан']})
+        return render(request, 'advertisement/regions.html', {'regions': 'Регион успешно создан'})
+
+
+class AddDb(View):
+    def get(self, request):
+        status = AdvertisementStatus.objects.get(id=1)
+        type_all = AdvertisementType.objects.all()
+        for num in range(3, 500001):
+            title = f'Объявление_{num}'
+            description = 'С другой стороны консультация с широким активом позволяет оценить значение позиций, ' \
+                          'занимаемых участниками в отношении поставленных задач.'
+            type = random.choice(type_all)
+            data = Advertisement(title=title,
+                                 description=description,
+                                 status=status,
+                                 type=type)
+            data.save()
+        return render(request, 'advertisement/add.html', {'regions': 'Данные успешно добавлены'})

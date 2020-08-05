@@ -8,4 +8,5 @@ urlpatterns = [
     path('about/', views.About.as_view(), name='about'),
     path('categories/', views.categories, name='categories'),
     path('regions/', views.RegionsView.as_view(), name='regions'),
+    # path('add/', views.AddDb.as_view(), name='regions'),
 ]
